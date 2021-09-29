@@ -1,0 +1,40 @@
+{
+    "tasks": [
+      {
+        "id": "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+        "taskName": "Task 2"
+      },
+      {
+        "id": "e1cd6a55-3073-486d-acc4-d18b093c9465",
+        "taskName": "Task 1"
+      }
+    ],
+    "users": [
+      {
+        "id": "34d0a830-5b7f-4fed-a929-8cbf2a7c1fe",
+        "userName": "Nguyen Nhat Minh",
+        "password": "123",
+        "email": "minh.nn250695@gmail.com",
+        "address": "",
+        "phone": "165156313",
+        "tasks": [
+          "a350396e-1976-4580-970a-3ec6d4e7e609",
+          "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+          "a350396e-1976-4580-970a-3ec6d4e7e609"
+        ]
+      },
+      {
+        "id": "34d0a830-5b29-8cbf2a7c1fe",
+        "userName": "Nguyen Nhat Minh",
+        "password": "123",
+        "email": "bao.nh2506@gmail.com",
+        "address": "",
+        "phone": "165156313",
+        "tasks": [
+          "a350396e-1976-4580-970a-3ec6d4e7e609",
+          "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+          "a350396e-1976-4580-970a-3ec6d4e7e609"
+        ]
+      }
+    ]
+  }
