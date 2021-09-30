@@ -1,40 +1,55 @@
 {
-    "tasks": [
-      {
-        "id": "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
-        "taskName": "Task 2"
-      },
-      {
-        "id": "e1cd6a55-3073-486d-acc4-d18b093c9465",
-        "taskName": "Task 1"
+  "tasks": [
+    {
+      "id": "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+      "taskName": "Task 1"
+    },
+    {
+      "id": "e1cd6a55-3073-486d-acc4-d18b093c9465",
+      "taskName": "Task 2"
+    },
+    {
+      "id": "a350396e-1976-4580-970a-3ec6d4e7e609",
+      "taskName": "Task 3"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "userName": "Nguyen Nhat Minh",
+      "password": "123",
+      "email": "minh.nn250695@gmail.com",
+      "address": "",
+      "phone": "0165156313",
+      "tasks": [
+        "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+        "e1cd6a55-3073-486d-acc4-d18b093c9465",
+        "a350396e-1976-4580-970a-3ec6d4e7e609"
+      ]
+    },
+    {
+      "id": "2",
+      "userName": "Nguyen Hoai Bao",
+      "password": "123",
+      "email": "bao.nh2506@gmail.com",
+      "address": "Ben Tre",
+      "phone": "3335156313",
+      "tasks": [
+        "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
+        "e1cd6a55-3073-486d-acc4-d18b093c9465"
+      ]
+    }
+  ],
+  "userIds": [
+    {
+      "params": {
+        "id": "1"
       }
-    ],
-    "users": [
-      {
-        "id": "34d0a830-5b7f-4fed-a929-8cbf2a7c1fe",
-        "userName": "Nguyen Nhat Minh",
-        "password": "123",
-        "email": "minh.nn250695@gmail.com",
-        "address": "",
-        "phone": "165156313",
-        "tasks": [
-          "a350396e-1976-4580-970a-3ec6d4e7e609",
-          "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
-          "a350396e-1976-4580-970a-3ec6d4e7e609"
-        ]
-      },
-      {
-        "id": "34d0a830-5b29-8cbf2a7c1fe",
-        "userName": "Nguyen Nhat Minh",
-        "password": "123",
-        "email": "bao.nh2506@gmail.com",
-        "address": "",
-        "phone": "165156313",
-        "tasks": [
-          "a350396e-1976-4580-970a-3ec6d4e7e609",
-          "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
-          "a350396e-1976-4580-970a-3ec6d4e7e609"
-        ]
+    },
+    {
+      "params": {
+        "id": "2"
       }
-    ]
-  }
+    }
+  ]
+}

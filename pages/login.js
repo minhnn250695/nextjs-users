@@ -1,7 +1,7 @@
 import bg from '../public/bg.png';
 import { useRef } from 'react';
 import '../styles/login.module.css'
-import Constant from './constant';
+
 export default function Login() {
 
     const userNameRef = useRef(null);

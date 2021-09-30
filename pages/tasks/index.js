@@ -7,16 +7,17 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link'
-import Constant from '../constant/index';
+import { useRouter } from 'next/router'
 
 export default function Tasks(props) {
+    const router = useRouter()
     return (
         <>
             <div>
                 <h1 className="d-flex justify-content-center user-list" color="dark">Task List</h1>
                 <div className="d-flex justify-content-end p-3">
                     <Link href="/tasks/new">
-                        <Button variant="contained" color="primary" >Add New Task</Button>
+                        <Button variant="contained" color="primary" style={{ float: 'right', marginTop: '10px', right:'18px'  }} >Add New Task</Button>
                     </Link>
                 </div>
             </div>
@@ -49,12 +50,18 @@ export default function Tasks(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Button type="button" variant="contained" color="primary" style={{ float: 'right', marginTop: '30px', right:'18px'  }} onClick={(e) => {
+                e.preventDefault()
+                router.push('/')
+            }}>Back To Home
+            </Button>
         </>
     );
 }
 
 export async function getServerSideProps() {
-    const res = await fetch(Constant.baseURL + Constant.getAllTask)
+    const res = await fetch('http://localhost:3000/api/task')
     const tasks = await res.json()
     if (!tasks) {
         return {

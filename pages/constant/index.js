@@ -1,10 +1,12 @@
 const API_Url = {
+    getUserIdList:"/userIds",
     getAllTask: "/tasks",
     getTaskById: "/tasks/{id}",
     addTask: "/tasks",
     updateTask: "/tasks/{id}",
     deleteTask: "/tasks/{id}",
 
+    getTaskIdList:"/taskIds",
     getAllUsers: "/users",
     getUserById: "/users/{id}",
     getUserByEmail: "/users?email={email}",

@@ -6,8 +6,14 @@ export default async function handler(req, res) {
     const { method, query } = req;
     switch (method) {
         case 'GET':
-            const result = await axios.get(Constant.baseURL + Constant.getAllTask);
-            res.status(200).json(result.data);
+            // console.log('~~~~~~~~~Enter get task method~~~~~~~~~~~');
+            const result = await axios(Constant.baseURL + Constant.getAllTask);
+            // console.log('~~~~~~~~~result~~~~~~~~~~~', result);
+
+            const tasks = result.data ? result.data : [];
+            // console.log('~~~~~~~~~Users~~~~~~~~~~~', tasks);
+
+            res.status(200).json(tasks);
             break;
 
         default:
