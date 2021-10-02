@@ -1,25 +1,34 @@
 import bg from '../public/bg.png';
 import { useRef } from 'react';
 import '../styles/login.module.css'
+import { useCallback, useEffect } from 'react'
+import router from 'next/router';
 
 export default function Login() {
 
     const userNameRef = useRef(null);
     const passWordRef = useRef(null);
 
-    const onClickLogin = async () => {
-        console.log('Clicked on login');
+    const onClickLogin = useCallback(async (e) => {
+        e.preventDefault();
+
         const email = userNameRef.current.value;
         const password = passWordRef.current.value;
         if (!email || !password) return;
-        else {
-            // const res = await fetch('/api/login', { headers: { email, password } })
-            // const res = await fetch(Constant.baseURL + Constant.getUserByEmail.replace('{email}', email));
-            // if (res) {
-            //     console.log('Pass authen', res);
-            // }
-        }
-    }
+
+        const authenticated = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        })
+        if (authenticated) { router.push('/') }
+
+    }, [])
+
+    useEffect(() => {
+        router.prefetch('/')
+    }, [])
+
     return (
         <div className="{}" style={{ backgroundImage: `url(${bg})`, height: '875px' }}>
             <section className="ftco-section">
@@ -41,8 +50,8 @@ export default function Login() {
                                         <span toggle="#password-field" className="fa fa-fw fa-eye field-icon toggle-password" />
                                     </div>
                                     <div className="form-group">
-                                        <button type="button" className="form-control btn btn-primary submit px-3" onClick={() =>
-                                            onClickLogin()}>Sign In</button>
+                                        <button type="button" className="form-control btn btn-primary submit px-3" onClick={(e) =>
+                                            onClickLogin(e)}>Sign In</button>
                                     </div>
                                 </form>
                             </div>
