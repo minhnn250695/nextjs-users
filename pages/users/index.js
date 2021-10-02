@@ -69,8 +69,6 @@ export default function Users(props) {
 }
 
 export async function getServerSideProps() {
-    // const res = await fetch(Constant.baseURL + Constant.getAllUsers)
-    // const users = res;
     const res = await fetch('http://localhost:3000/api/user')
     const users = await res.json()
     if (!users) {
