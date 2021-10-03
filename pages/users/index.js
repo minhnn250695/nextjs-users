@@ -7,11 +7,22 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link'
-import Constant from '../constant/index';
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { deleteUser, getUsers } from '../../redux/actions/user';
 
-export default function Users(props) {
+export default function Users() {
     const router = useRouter()
+    const dispatch = useDispatch();
+    const users = useSelector((state) => state.user);
+
+    useEffect(() => {
+    }, [])
+
+    const deleteUserOnclick = (id) => {
+        dispatch(deleteUser(id));
+    }
 
     return (
         <>
@@ -37,7 +48,7 @@ export default function Users(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.users && props.users.map((row) => (
+                        {users && users.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
                                     {row.name}
@@ -64,20 +75,21 @@ export default function Users(props) {
                 router.push('/')
             }}>Back To Home
             </Button>
+
         </>
     );
 }
 
-export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/user')
-    const users = await res.json()
-    if (!users) {
-        return {
-            notFound: true,
-        }
-    }
+// export async function getServerSideProps() {
+//     const res = await fetch('http://localhost:3000/api/user')
+//     const users = await res.json()
+//     if (!users) {
+//         return {
+//             notFound: true,
+//         }
+//     }
 
-    return {
-        props: { users },
-    }
-}
+//     return {
+//         props: { users },
+//     }
+// }

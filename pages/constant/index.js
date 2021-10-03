@@ -19,6 +19,7 @@ const API_Url = {
 const Constant = {
     ...API_Url,
     baseURL:'http://localhost:5000',
+    basApiRouteUrl:'http://localhost:3000',
     token: 'authentication_token',
     expire_time: 'expire_time',
 }

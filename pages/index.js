@@ -1,15 +1,20 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import router from 'next/router';
 
 export default function Home() {
-  //TODO
-  // useSelector => user
-  // useEffect(() => {
-  //   if (!(user) {
-  //     router.push('/login')
-  //   }
-  // }, [user])
+  const authenticated = useSelector((state) => state.base.isAuthenticated);
+  const state = useSelector((state) => state);
+  useEffect(() => {
+    console.log('authenticated', authenticated);
+    if (!authenticated) {
+      router.push('/login')
+    }
+  }, [authenticated])
+
 
   return (
     <div className={styles.container}>

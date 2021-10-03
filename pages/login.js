@@ -3,8 +3,13 @@ import { useRef } from 'react';
 import '../styles/login.module.css'
 import { useCallback, useEffect } from 'react'
 import router from 'next/router';
+import { useDispatch } from 'react-redux';
+import { getUsers } from '../redux/actions/user';
+import { getTasks } from '../redux/actions/task';
+import ActionTypes from '../redux/actions/actionTypes';
 
 export default function Login() {
+    const dispatch = useDispatch();
 
     const userNameRef = useRef(null);
     const passWordRef = useRef(null);
@@ -16,12 +21,19 @@ export default function Login() {
         const password = passWordRef.current.value;
         if (!email || !password) return;
 
+        dispatch({ type: ActionTypes.START_LOGIN });
         const authenticated = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         })
-        if (authenticated) { router.push('/') }
+        if (authenticated) {
+            dispatch({ type: ActionTypes.LOGIN_SUCCESS });
+            dispatch(getUsers());
+            dispatch(getTasks());
+
+            router.push('/')
+        }
 
     }, [])
 
