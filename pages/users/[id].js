@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Constant from "../constant";
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import { addUser, updateUser } from "../../redux/actions/user";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function UserDetail({ userDetail }) {
     const router = useRouter()
@@ -12,18 +14,17 @@ export default function UserDetail({ userDetail }) {
     const emailRef = useRef(null);
     const passRef = useRef(null);
     const phoneRef = useRef(null);
-
     const [isCreate, setIsCreate] = useState(false);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const { id } = router.query;
 
     useEffect(() => {
-        const { id } = userDetail?.id;
-        if (id === 'new') {
-            setIsCreate(true);
-        } else if (id !== 'new') {
+        if (id !== 'new') {
             setIsCreate(false);
+        } else if (id === 'new') {
+            setIsCreate(true);
         }
-    }, [])
+    }, [id])
 
     const onSubmitForm = (e) => {
         e.preventDefault();
@@ -35,11 +36,11 @@ export default function UserDetail({ userDetail }) {
             address: addressRef.current.value,
             phone: phoneRef.current.value
         };
-        // if (isCreate) {
-        //     dispatch(addUser(data));
-        // } else {
-        //     dispatch(updateUser(data));
-        // }
+        if (isCreate) {
+            dispatch(addUser(data));
+        } else {
+            dispatch(updateUser(data));
+        }
         router.push('/users');
     }
 
@@ -92,6 +93,7 @@ export default function UserDetail({ userDetail }) {
 
 export async function getStaticPaths() {
     const paths = [
+        { params: { id: 'new' } },
         { params: { id: '1' } },
         { params: { id: '2' } }
     ]
@@ -103,6 +105,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    if (params.id === 'new')
+        return {
+            props: {
+                userDetail: null
+            }
+        }
+
+    console.log('still here');
+
     const res = await fetch(Constant.baseURL + Constant.getUserById.replace('{id}', params.id))
     const userDetail = await res.json();
     return {

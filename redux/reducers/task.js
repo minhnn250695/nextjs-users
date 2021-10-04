@@ -1,5 +1,5 @@
 import ActionTypes from '../actions/actionTypes';
-const taskReducer = (state = [], action) => {
+const taskReducer = (state = [{}], action) => {
     switch (action.type) {
 
         case ActionTypes.FETCH_TASKS_SUCCESS:

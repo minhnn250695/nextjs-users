@@ -10,6 +10,7 @@ const userReducer = (state = [], action) => {
             return [...state, action.payload];
 
         case ActionTypes.UPDATE_USER_SUCCESS:
+            console.log('action payload', action.payload);
             return state.map(user => user.id === action.payload.id ? action.payload : user);
 
         case ActionTypes.DELETE_USER_SUCCESS:

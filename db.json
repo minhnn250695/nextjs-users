@@ -19,25 +19,24 @@
       "userName": "Nguyen Nhat Minh",
       "password": "123",
       "email": "minh.nn250695@gmail.com",
-      "address": "",
-      "phone": "0165156313",
-      "tasks": [
-        "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
-        "e1cd6a55-3073-486d-acc4-d18b093c9465",
-        "a350396e-1976-4580-970a-3ec6d4e7e609"
-      ]
+      "address": "Binh Tan 1",
+      "phone": "0165156313"
     },
     {
       "id": "2",
       "userName": "Nguyen Hoai Bao",
       "password": "123",
       "email": "bao.nh2506@gmail.com",
-      "address": "Ben Tre",
-      "phone": "3335156313",
-      "tasks": [
-        "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4",
-        "e1cd6a55-3073-486d-acc4-d18b093c9465"
-      ]
+      "address": "Ben Tre 2",
+      "phone": "3335156313"
+    },
+    {
+      "id": "baef0ecc-5077-4e85-b55d-2e87121d7103",
+      "userName": "new one",
+      "password": "123",
+      "email": "minh.nn250695@gmail.com",
+      "address": "34",
+      "phone": ""
     }
   ],
   "userIds": [

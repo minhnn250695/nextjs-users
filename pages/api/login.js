@@ -4,8 +4,8 @@ import Constant from "../constant";
 export default async function handler(req, res) {
     await cors(req, res)
     const { method, query, body } = req;
-    // console.warn('^^^^^^^Method', method);
-    // console.warn('^^^^^^^Body', body);
+    console.warn('^^^^^^^Method', method);
+    console.warn('^^^^^^^Body', body);
 
     switch (method) {
         case 'POST':

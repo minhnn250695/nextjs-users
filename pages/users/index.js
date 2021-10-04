@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { deleteUser, getUsers } from '../../redux/actions/user';
+import { deleteUser } from '../../redux/actions/user';
 
 export default function Users() {
     const router = useRouter()
@@ -18,7 +18,8 @@ export default function Users() {
     const users = useSelector((state) => state.user);
 
     useEffect(() => {
-    }, [])
+        console.log('USERs',users);
+    }, [users])
 
     const deleteUserOnclick = (id) => {
         dispatch(deleteUser(id));
@@ -51,15 +52,14 @@ export default function Users() {
                         {users && users.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
                                 </TableCell>
-                                <TableCell style={{ maxWidth: "200px" }} align="right">{row.id}</TableCell>
-                                <TableCell align="right">{row.userName}</TableCell>
-                                <TableCell align="right">{row.email}</TableCell>
-                                <TableCell align="right">{row.address}</TableCell>
-                                <TableCell align="right">{row.phone}</TableCell>
+                                <TableCell style={{ maxWidth: "200px" }} align="right">{row?.id}</TableCell>
+                                <TableCell align="right">{row?.userName}</TableCell>
+                                <TableCell align="right">{row?.email}</TableCell>
+                                <TableCell align="right">{row?.address}</TableCell>
+                                <TableCell align="right">{row?.phone}</TableCell>
                                 <TableCell align="right">
-                                    <Link href={`/users/${row.id}`}>
+                                    <Link href={`/users/${row?.id}`}>
                                         <Button variant="contained" color="primary">Edit</Button>
                                     </Link>
                                     <Button variant="contained" className="ml-2" color="primary" onClick={() => deleteUserOnclick(row.id)}>Delete</Button>

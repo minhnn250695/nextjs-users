@@ -35,7 +35,6 @@ export default function Tasks(props) {
                         {props.tasks && props.tasks.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
                                 </TableCell>
                                 <TableCell style={{ maxWidth: "200px" }} align="right">{row.id}</TableCell>
                                 <TableCell align="right">{row.taskName}</TableCell>
