@@ -24,19 +24,11 @@
     },
     {
       "id": "2",
-      "userName": "Nguyen Hoai Bao",
+      "userName": "Nguyen Hoai Bao 3",
       "password": "123",
       "email": "bao.nh2506@gmail.com",
       "address": "Ben Tre 2",
       "phone": "3335156313"
-    },
-    {
-      "id": "baef0ecc-5077-4e85-b55d-2e87121d7103",
-      "userName": "new one",
-      "password": "123",
-      "email": "minh.nn250695@gmail.com",
-      "address": "34",
-      "phone": ""
     }
   ],
   "userIds": [

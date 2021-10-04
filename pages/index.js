@@ -7,9 +7,10 @@ import router from 'next/router';
 
 export default function Home() {
   const authenticated = useSelector((state) => state.base.isAuthenticated);
-  const state = useSelector((state) => state);
+  const base = useSelector((state) => state.base);
   useEffect(() => {
-    console.log('authenticated', authenticated);
+    console.log('Base reducer', base);
+
     if (!authenticated) {
       router.push('/login')
     }

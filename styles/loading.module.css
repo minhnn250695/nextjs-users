@@ -1,0 +1,7 @@
+.loading {
+    position: fixed;
+    top: 0;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    z-index: 3;
+  }
