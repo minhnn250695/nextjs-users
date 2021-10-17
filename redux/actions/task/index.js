@@ -15,22 +15,38 @@ export const getTasks = () => async dispatch => {
     }
 }
 
-
 export const addTask = (data) => async dispatch => {
     dispatch({ type: ActionTypes.START_LOADING });
     try {
-        const res = await createTaskAPI(data);
-        dispatch({ type: ActionTypes.ADD_TASK_SUCCESS, payload: res.data });
+        const res = await fetch('/api/task',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        const newTask = await res.json();
+        dispatch({ type: ActionTypes.ADD_TASK_SUCCESS, payload: newTask });
+        setTimeout(() => {
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000);
 
     } catch (error) {
     }
 }
-
 export const updateTask = (data) => async dispatch => {
     dispatch({ type: ActionTypes.START_LOADING });
     try {
-        const res = await updateTaskAPI(data);
-        dispatch({ type: ActionTypes.UPDATE_TASK_SUCCESS, payload: res.data });
+        const res = await fetch('/api/task',
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        const taskUpdated = await res.json();
+        dispatch({ type: ActionTypes.UPDATE_TASK_SUCCESS, payload: taskUpdated });
+        setTimeout(() => {
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000);
 
     } catch (error) {
     }
@@ -39,8 +55,17 @@ export const updateTask = (data) => async dispatch => {
 export const deleteTask = (id) => async dispatch => {
     dispatch({ type: ActionTypes.START_LOADING });
     try {
-        let res = await deleteTaskAPI(id);
+        const res = await fetch('/api/task',
+            {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            }
+        );
         dispatch({ type: ActionTypes.DELETE_TASK_SUCCESS, payload: id });
+        setTimeout(() => {
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000);
 
     } catch (error) {
     }

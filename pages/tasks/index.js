@@ -9,9 +9,29 @@ import Button from '@material-ui/core/Button';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout';
+import ActionTypes from '../../redux/actions/actionTypes';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {deleteTask} from '../../redux/actions/task'
 
 export default function Tasks(props) {
     const router = useRouter()
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => state.task);
+
+    useEffect(() => {
+        if (tasks.length === 0) {
+            dispatch({
+                type: ActionTypes.TASK_UPDATE_STORE,
+                payload: props.tasks
+            });
+        }
+        dispatch({ type: ActionTypes.END_LOADING });
+
+    }, [tasks])
+    const onClickDeleteTask = (id) => {
+        dispatch(deleteTask(id));
+    }
     return (
         <>
             <Layout>
@@ -34,7 +54,7 @@ export default function Tasks(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.tasks && props.tasks.map((row) => (
+                            {tasks && tasks.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                     </TableCell>
@@ -62,16 +82,12 @@ export default function Tasks(props) {
     );
 }
 
-export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/task')
-    const tasks = await res.json()
-    if (!tasks) {
-        return {
-            notFound: true,
-        }
-    }
-
+export async function getStaticProps({ params }) {
+    const res = await fetch('http://localhost:3000/api/task');
+    const tasks = await res.json();
     return {
-        props: { tasks },
+        props: {
+            tasks
+        }
     }
 }

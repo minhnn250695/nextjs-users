@@ -1,26 +1,30 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Constant from "../constant";
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Layout from "../../components/Layout";
+import ActionTypes from "../../redux/actions/actionTypes";
+import { addTask, updateTask } from "../../redux/actions/task";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function TaskDetail({ taskDetail }) {
     const router = useRouter()
     const nameRef = useRef(null);
 
     const [isCreate, setIsCreate] = useState(false);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const id = taskDetail.id;
 
     useEffect(() => {
-        const { id } = taskDetail?.id;
-        if (id === 'new') {
-            setIsCreate(true);
-        } else if (id !== 'new') {
+        console.log(id);
+
+        if (id != 'new') {
             setIsCreate(false);
+        } else {
+            setIsCreate(true);
         }
-    }, [])
+    }, [id])
 
     const onSubmitForm = (e) => {
         e.preventDefault();
@@ -28,12 +32,17 @@ export default function TaskDetail({ taskDetail }) {
             id: isCreate ? uuidv4() : taskDetail?.id,
             taskName: nameRef.current.value,
         };
-        // if (isCreate) {
-        //     dispatch(addTask(data));
-        // } else {
-        //     dispatch(updateTask(data));
-        // }
-        // router.push('/tasks');
+
+        if (isCreate) {
+            dispatch(addTask(data));
+        } else {
+            dispatch(updateTask(data));
+        }
+        setTimeout(() => {
+            dispatch({ type: ActionTypes.RESET_TASK_STORE })
+            router.push('/tasks');
+
+        }, 1000);
     }
 
     return (
@@ -63,12 +72,12 @@ export default function TaskDetail({ taskDetail }) {
 
 export async function getStaticPaths() {
     const paths = [
+        { params: { id: "new" } },
         { params: { id: "e0b2e0d3-18b8-48c5-babc-6a71a53f27a4" } },
         { params: { id: "e1cd6a55-3073-486d-acc4-d18b093c9465" } },
         { params: { id: "a350396e-1976-4580-970a-3ec6d4e7e609" } }
-
     ]
-
+    console.log(paths);
     return {
         paths,
         fallback: false
@@ -76,6 +85,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    if (params.id == 'new') {
+        return {
+            props: {
+                taskDetail: {id:'new'}
+            }
+        }
+    }
     const res = await fetch(Constant.baseURL + Constant.getTaskById.replace('{id}', params.id))
     const taskDetail = await res.json();
     return {
