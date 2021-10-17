@@ -7,7 +7,6 @@ export default function Header() {
     const { authen, mutateUser } = useUser()
     const router = useRouter()
     useEffect(() => {
-        console.log('Header authen value', authen);
     }, [authen]);
     return (
         <header>

@@ -93,7 +93,6 @@ export default function Users(props) {
 export async function getServerSideProps() {
     const res = await fetch('http://localhost:3000/api/user')
     const users = await res.json()
-    console.log('Update users', users);
     if (!users) {
         return {
             notFound: true,

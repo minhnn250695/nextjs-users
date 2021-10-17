@@ -23,7 +23,6 @@ export default function TaskDetail({ taskDetail }) {
     }, [])
 
     const onSubmitForm = (e) => {
-        console.log('onClick Save');
         e.preventDefault();
         const data = {
             id: isCreate ? uuidv4() : taskDetail?.id,
