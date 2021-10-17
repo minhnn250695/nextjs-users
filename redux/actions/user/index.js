@@ -7,12 +7,13 @@ export const getUsers = () => async dispatch => {
     try {
         const response = await fetch('/api/user');
         const users = await response.json();
-
         dispatch({
             type: ActionTypes.FETCH_USERS_SUCCESS,
             payload: users
         });
-        dispatch({ type: ActionTypes.END_LOADING });
+        setTimeout(() => {           
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000);        
 
     } catch (error) {
     }
@@ -20,7 +21,6 @@ export const getUsers = () => async dispatch => {
 
 export const addUser = (data) => async dispatch => {
     dispatch({ type: ActionTypes.START_LOADING });
-    console.log('Add user data', data);
     try {
         const res = await fetch('/api/user',
             {
@@ -30,7 +30,9 @@ export const addUser = (data) => async dispatch => {
             });
         const newUser = await res.json();
         dispatch({ type: ActionTypes.ADD_USER_SUCCESS, payload: newUser });
-        dispatch({ type: ActionTypes.END_LOADING });
+        setTimeout(() => {           
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000); 
 
     } catch (error) {
     }
@@ -47,7 +49,9 @@ export const updateUser = (data) => async dispatch => {
             });
         const userUpdated = await res.json();
         dispatch({ type: ActionTypes.UPDATE_USER_SUCCESS, payload: userUpdated });
-        dispatch({ type: ActionTypes.END_LOADING });
+        setTimeout(() => {           
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000); 
 
     } catch (error) {
     }
@@ -64,7 +68,9 @@ export const deleteUser = (id) => async dispatch => {
             }
         );
         dispatch({ type: ActionTypes.DELETE_USER_SUCCESS, payload: id });
-        dispatch({ type: ActionTypes.END_LOADING });
+        setTimeout(() => {           
+            dispatch({ type: ActionTypes.END_LOADING });
+        }, 1000); 
 
     } catch (error) {
     }

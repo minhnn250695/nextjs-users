@@ -1,24 +1,18 @@
-import axios from "axios";
-import { cors } from "../../lib/cor-middle-ware";
-import Constant from "../constant";
-export default async function handler(req, res) {
-    await cors(req, res)
-    const { method, query, body } = req;
-    console.warn('^^^^^^^Method', method);
-    console.warn('^^^^^^^Body', body);
 
-    switch (method) {
-        case 'POST':
-            const loginResponse = await axios(Constant.baseURL + Constant.getUserByEmail.replace('{email}', body.email));
-            const userInfo = loginResponse.data;
-            let authenticatedPost = false;
-            if (userInfo) {
-                authenticatedPost = userInfo[0].password === body.password;
-            }
-            res.status(200).json(authenticatedPost);
-            break;
 
-        default:
-            break;
-    }
-}
+import withSession from '../../lib/session'
+
+export default withSession(async (req, res) => {
+  const { username } = await req.body
+  const url = `https://api.github.com/users/${username}`
+
+  try {
+    const authen = { isLoggedIn: true }
+    req.session.set('authen', authen)
+    await req.session.save()
+    res.status(200).json(authen);
+
+  } catch (error) {
+
+  }
+})

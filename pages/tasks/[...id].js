@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Constant from "../constant";
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import Layout from "../../components/Layout";
 
 export default function TaskDetail({ taskDetail }) {
     const router = useRouter()
@@ -37,25 +38,27 @@ export default function TaskDetail({ taskDetail }) {
     }
 
     return (
-        <form className="container">
-            <h3 className="title">{isCreate ? "Create New Task" : "Update Task Info"}</h3>
-            <div className="form-group">
-                <label style={{ textAlign: 'left', width: '100%' }}>Task Name</label>
-                <input type="text" className="form-control" defaultValue={taskDetail?.taskName} ref={nameRef} placeholder="Task name" />
-            </div>
-            <div className='d-flex justify-content-end mt-4'>
-                <div>
-                    <Button type="button" variant="contained" color="primary" style={{ float: 'right', marginTop: '30px', right: '18px' }}
-                        className="btn btn-primary btn-block" onClick={(e) => onSubmitForm(e)}>Save
-                    </Button>
-                    <Button type="button" variant="contained" color="primary" style={{ float: 'right', marginTop: '30px', marginRight: '5px', right: '18px' }} onClick={(e) => {
-                        e.preventDefault()
-                        router.push('/tasks')
-                    }}>Back
-                    </Button>
+        <Layout>
+            <form className="container">
+                <h3 className="title">{isCreate ? "Create New Task" : "Update Task Info"}</h3>
+                <div className="form-group">
+                    <label style={{ textAlign: 'left', width: '100%' }}>Task Name</label>
+                    <input type="text" className="form-control" defaultValue={taskDetail?.taskName} ref={nameRef} placeholder="Task name" />
                 </div>
-            </div>
-        </form>
+                <div className='d-flex justify-content-end mt-4'>
+                    <div>
+                        <Button type="button" variant="contained" color="primary" style={{ float: 'right', marginTop: '30px', right: '18px' }}
+                            className="btn btn-primary btn-block" onClick={(e) => onSubmitForm(e)}>Save
+                        </Button>
+                        <Button type="button" variant="contained" color="primary" style={{ float: 'right', marginTop: '30px', marginRight: '5px', right: '18px' }} onClick={(e) => {
+                            e.preventDefault()
+                            router.push('/tasks')
+                        }}>Back
+                        </Button>
+                    </div>
+                </div>
+            </form>
+        </Layout>
     );
 }
 
